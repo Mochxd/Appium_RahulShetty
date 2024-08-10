@@ -15,8 +15,10 @@ public class longPressTest extends BaseTest{
         androidDriver.findElement(AppiumBy.accessibilityId("Expandable Lists")).click();
         androidDriver.findElement(AppiumBy.accessibilityId("1. Custom Adapter")).click();
         WebElement peopleNames = androidDriver.findElement(AppiumBy.xpath("//android.widget.TextView[@text=\"People Names\"]"));
-        ((JavascriptExecutor) androidDriver).executeScript("mobile: longClickGesture",
-                ImmutableMap.of("elementId", ((RemoteWebElement) peopleNames).getId(), "duration", 2000));
+        longPress(peopleNames);
+        String menuText = androidDriver.findElement(AppiumBy.xpath("//android.widget.TextView[contains(@text,'Sample menu')]")).getText();
+        System.out.printf(menuText);
+        Assert.assertEquals(menuText,"Sample menu");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
