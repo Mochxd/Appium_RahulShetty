@@ -36,6 +36,12 @@ public class BaseTest {
         ((JavascriptExecutor) androidDriver).executeScript("mobile: longClickGesture",
                 ImmutableMap.of("elementId", ((RemoteWebElement) ele).getId(), "duration", 2000));
     }
+    public void swipe(WebElement ele, String direction){
+        ((JavascriptExecutor) androidDriver).executeScript("mobile: swipeGesture", ImmutableMap.of(
+                "elementId", ((RemoteWebElement) ele).getId(),
+                "direction", direction,
+                "percent", 0.75));
+    }
     @AfterClass
     public void tearDown(){
         androidDriver.quit();
