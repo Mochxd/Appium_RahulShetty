@@ -7,7 +7,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -17,7 +19,7 @@ import java.time.Duration;
 public class BaseTest {
     protected AndroidDriver androidDriver;
     protected AppiumDriverLocalService service;
-    @BeforeClass
+    @BeforeMethod
     public void configureAppium() throws MalformedURLException {
         service = new AppiumServiceBuilder()
                 .withAppiumJS(new File("C:\\Users\\zas\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
@@ -51,7 +53,7 @@ public class BaseTest {
         ));
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown(){
         androidDriver.quit();
         service.stop();
