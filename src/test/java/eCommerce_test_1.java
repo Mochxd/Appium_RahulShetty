@@ -43,6 +43,32 @@ public class eCommerce_test_1 extends BaseTest{
         Thread.sleep(3000);
     }
     @Test
+    public void fAddProductToCart2() throws InterruptedException {
+        androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/nameField")).sendKeys("Eman Mostafa");
+        androidDriver.hideKeyboard();
+        androidDriver.findElement(AppiumBy.id("android:id/text1")).click();
+        androidDriver.findElement(AppiumBy.androidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
+                        + "new UiSelector().text(\"Egypt\"));")).click();
+        androidDriver.findElement((AppiumBy.id("com.androidsample.generalstore:id/radioFemale"))).click();
+        androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/btnLetsShop")).click();
+
+        androidDriver.findElement(AppiumBy.androidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
+                        + "new UiSelector().text(\"Air Jordan 9 Retro\"));"));
+
+        int productCount = androidDriver.findElements(AppiumBy.id("com.androidsample.generalstore:id/productName")).size();
+        for (int i = 0; i < productCount; i++) {
+            String productName = androidDriver.findElements(AppiumBy.id("com.androidsample.generalstore:id/productName")).get(i).getText();
+            if (productName.equalsIgnoreCase("Air Jordan 9 Retro")) {
+                androidDriver.findElements(AppiumBy.id("com.androidsample.generalstore:id/productAddCart")).get(i).click();
+                break;
+            }
+        }
+        androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
+        Thread.sleep(3000);
+    }
+    @Test
     public void fillFormWithoutEnteringName() throws InterruptedException {
         androidDriver.findElement(AppiumBy.id("android:id/text1")).click();
         androidDriver.findElement(AppiumBy.androidUIAutomator(
