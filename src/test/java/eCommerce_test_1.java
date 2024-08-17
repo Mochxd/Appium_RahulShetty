@@ -1,5 +1,10 @@
+import com.beust.ah.A;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumFluentWait;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +17,7 @@ import javax.swing.plaf.TableHeaderUI;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class eCommerce_test_1 extends BaseTest{
     @Test
@@ -106,8 +112,22 @@ public class eCommerce_test_1 extends BaseTest{
 
         WebElement totalAmountLbl = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.androidsample.generalstore:id/totalAmountLbl")));
         double actualResult = stringParse(totalAmountLbl.getText());
-
         Assert.assertEquals(actualResult, sum);
+        longPress(androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/termsButton")));
+        androidDriver.findElement(AppiumBy.id("android:id/button1")).click();
+        androidDriver.findElement(AppiumBy.className("android.widget.CheckBox")).click();
+        androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/btnProceed")).click();
+        Thread.sleep(4000);
+        Set<String> contextHandles = androidDriver.getContextHandles();
+        for (String context : contextHandles) {
+            System.out.println(context);
+        }
+        androidDriver.context("WEBVIEW_com.androidsample.generalstore");
+        androidDriver.findElement(By.name("q")).sendKeys("cat");
+        androidDriver.findElement(By.name("q")).sendKeys(Keys.ENTER);
+        Thread.sleep(200);
+        androidDriver.pressKey(new KeyEvent(AndroidKey.BACK));
+        androidDriver.context("NATIVE_APP");
     }
 
         @Test
