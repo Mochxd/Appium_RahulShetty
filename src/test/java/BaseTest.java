@@ -30,6 +30,7 @@ public class BaseTest {
         options.setDeviceName("Mostafa");
         //options.setApp("D:\\Appium\\Raul\\src\\main\\resources\\ApiDemos-debug.apk");
         options.setApp("D:\\Appium\\Raul\\src\\main\\resources\\General-Store.apk");
+        options.setChromedriverExecutable("D:\\Appium\\Raul\\src\\main\\resources\\chromedriver.exe");
         androidDriver = new AndroidDriver(new URL("http://127.0.0.1:4723/"),options);
         androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
