@@ -1,6 +1,7 @@
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumFluentWait;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,6 +10,8 @@ import org.testng.annotations.Test;
 
 import javax.swing.plaf.TableHeaderUI;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class eCommerce_test_1 extends BaseTest{
     @Test
@@ -73,8 +76,41 @@ public class eCommerce_test_1 extends BaseTest{
 
         Assert.assertEquals(androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/productName")).getText(),"Air Jordan 9 Retro");
     }
-
     @Test
+    public void AddProductToCart3() throws InterruptedException {
+        androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/nameField")).sendKeys("Eman Mostafa");
+        androidDriver.hideKeyboard();
+        androidDriver.findElement(AppiumBy.id("android:id/text1")).click();
+        androidDriver.findElement(AppiumBy.androidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
+                        + "new UiSelector().text(\"Albania\"));")).click();
+
+        androidDriver.findElement((AppiumBy.id("com.androidsample.generalstore:id/radioFemale"))).click();
+        androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/btnLetsShop")).click();
+
+        androidDriver.findElements(AppiumBy.xpath("//android.widget.TextView[@text='ADD TO CART']")).get(0).click();
+        androidDriver.findElements(AppiumBy.xpath("//android.widget.TextView[@text='ADD TO CART']")).get(0).click();
+        androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
+
+
+        WebDriverWait wait = new WebDriverWait(androidDriver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.androidsample.generalstore:id/toolbar_title")));
+
+        List<WebElement> price = androidDriver.findElements(AppiumBy.id("com.androidsample.generalstore:id/productPrice"));
+        double sum = 0;
+        for (WebElement element : price) {
+            String priceString = element.getText();
+            double priceValue = stringParse(priceString);
+            sum += priceValue;
+        }
+
+        WebElement totalAmountLbl = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.androidsample.generalstore:id/totalAmountLbl")));
+        double actualResult = stringParse(totalAmountLbl.getText());
+
+        Assert.assertEquals(actualResult, sum);
+    }
+
+        @Test
     public void fillFormWithoutEnteringName() throws InterruptedException {
         androidDriver.findElement(AppiumBy.id("android:id/text1")).click();
         androidDriver.findElement(AppiumBy.androidUIAutomator(
