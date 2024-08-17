@@ -6,9 +6,7 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
@@ -51,6 +49,10 @@ public class BaseTest {
                 "endX", x,
                 "endY", y
         ));
+    }
+    public double stringParse(String amount){
+        double substring = Double.parseDouble(amount.substring(1));
+        return  substring;
     }
 
     @AfterMethod
