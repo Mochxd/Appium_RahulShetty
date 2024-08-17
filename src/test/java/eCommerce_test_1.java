@@ -21,7 +21,7 @@ public class eCommerce_test_1 extends BaseTest{
         androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/btnLetsShop")).click();
     }
     @Test
-    public void fAddProductToCart() throws InterruptedException {
+    public void AddProductToCart() throws InterruptedException {
         androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/nameField")).sendKeys("Eman Mostafa");
         androidDriver.hideKeyboard();
         androidDriver.findElement(AppiumBy.id("android:id/text1")).click();
@@ -40,10 +40,9 @@ public class eCommerce_test_1 extends BaseTest{
 
         androidDriver.findElement(AppiumBy.xpath("(//android.widget.TextView[@resource-id=\"com.androidsample.generalstore:id/productAddCart\"])[2]")).click();
         androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
-        Thread.sleep(3000);
     }
     @Test
-    public void fAddProductToCart2() throws InterruptedException {
+    public void AddProductToCart2() throws InterruptedException {
         androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/nameField")).sendKeys("Eman Mostafa");
         androidDriver.hideKeyboard();
         androidDriver.findElement(AppiumBy.id("android:id/text1")).click();
@@ -66,7 +65,9 @@ public class eCommerce_test_1 extends BaseTest{
             }
         }
         androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
-        Thread.sleep(3000);
+        WebDriverWait wait = new WebDriverWait(androidDriver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.attributeContains(AppiumBy.id("com.androidsample.generalstore:id/toolbar_title"),"text","Cart"));
+        Assert.assertEquals(androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/productName")).getText(),"Air Jordan 9 Retro");
     }
     @Test
     public void fillFormWithoutEnteringName() throws InterruptedException {
