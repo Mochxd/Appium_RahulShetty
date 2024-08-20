@@ -1,6 +1,7 @@
 import com.beust.ah.A;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumFluentWait;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
@@ -13,23 +14,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.swing.plaf.TableHeaderUI;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class eCommerce_test_1 extends BaseTest{
+
     @Test
     public void fillForm() throws InterruptedException {
-        androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/nameField")).sendKeys("Eman Mostafa");
-        androidDriver.hideKeyboard();
-        androidDriver.findElement(AppiumBy.id("android:id/text1")).click();
-        androidDriver.findElement(AppiumBy.androidUIAutomator(
-                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
-                        + "new UiSelector().text(\"Egypt\"));")).click();
-        androidDriver.findElement((AppiumBy.id("com.androidsample.generalstore:id/radioFemale"))).click();
-        androidDriver.findElement(AppiumBy.id("com.androidsample.generalstore:id/btnLetsShop")).click();
+        FillForm fillForm = new FillForm(androidDriver);
+        fillForm.enterName("Eman Mostafa");
+        fillForm.selectCountry("Egypt");
+        fillForm.selectFemaleGender();
+        fillForm.clickLetsShop();
     }
     @Test
     public void AddProductToCart() throws InterruptedException {
