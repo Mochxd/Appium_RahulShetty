@@ -1,19 +1,13 @@
-import com.beust.ah.A;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.AppiumFluentWait;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +19,7 @@ public class eCommerce_test_1 extends BaseTest{
         FillForm fillForm = new FillForm(androidDriver);
         fillForm.enterName("Eman Mostafa");
         fillForm.selectCountry("Egypt");
-        fillForm.selectFemaleGender();
+        fillForm.selectGender("female");
         fillForm.clickLetsShop();
     }
     @Test
@@ -126,7 +120,6 @@ public class eCommerce_test_1 extends BaseTest{
         androidDriver.pressKey(new KeyEvent(AndroidKey.BACK));
         androidDriver.context("NATIVE_APP");
     }
-
         @Test
     public void fillFormWithoutEnteringName() throws InterruptedException {
         androidDriver.findElement(AppiumBy.id("android:id/text1")).click();
